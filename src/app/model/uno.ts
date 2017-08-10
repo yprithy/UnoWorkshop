@@ -5,6 +5,10 @@ export interface Card {
     [key: string]: any
 }
 
+export interface Player {
+    
+}
+
 export class UnoDeck {
 
     private static colours = ["Red", "Yellow", "Green", "Blue"];
@@ -44,6 +48,19 @@ export class UnoDeck {
                         colour: "Plus 4 Cards",
                     image: "/assets/uno_deck/c4_01.png"});
                     }
+
+        }
+
+        public Shuffle(times: number = 5) {
+
+            for(let x = 0; x<times; x++) {
+            for(let i in this.cards){
+                let swapNum = Math.floor(Math.random()*100);
+                let c:Card = this.cards[swapNum];
+                this.cards[swapNum] = this.cards[i];
+                this.cards[swapNum] = c;
+            }
+            }
 
         }
         
