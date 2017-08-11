@@ -1,3 +1,42 @@
-<p>
-  header works!
-</p>
+<h1>Welcome to Uno Games</h1>
+<div>
+  <table>
+    <tr>
+      <th>
+        Add a Player
+      </th>
+      <th>
+        Remove a Player
+      </th>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td>
+        <button (click)="AddPlayer()">Add</button>
+      </td>
+      <td>
+        <button (click)="RemovePlayer()">Remove</button>
+      </td>
+    </tr>
+  </table>
+  <p>No of players {{GetPlayersCount()}}</p>
+  <div *ngIf="GetPlayersCount()==7">
+    <p>Maximum Players count reached</p>
+  </div>
+  <div *ngIf="GetPlayersCount()==2">
+    <p>Minimum of 2 Players required</p>
+  </div>
+  <p>Click to start game</p>
+  <br/>
+  <button (click)="StartGame()">Start</button>
+  <table>
+    <tr *ngFor="let player of GetPlayers()">
+      <td>
+        {{player.name}}
+      </td>
+      <td *ngFor="let card of player.cards">
+        <img src={{card.image}}>
+      </td>
+    </tr>
+  </table>
+</div>

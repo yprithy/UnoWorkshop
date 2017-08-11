@@ -6,13 +6,15 @@ export interface Card {
 }
 
 export interface Player {
-    
+    name: string,
+    cards: Card[]    
 }
 
 export class UnoDeck {
 
     private static colours = ["Red", "Yellow", "Green", "Blue"];
-    private cards:Card[] = [];
+    public cards:Card[] = [];
+    private static remainingCardsCount: number = 108;
 
     constructor(){
 
@@ -28,7 +30,7 @@ export class UnoDeck {
                     }
                     this.cards.push({value: j+1, 
                         colour: UnoDeck.colours[c],
-                    image: "/assets/uno_deck/c0" +c+"_" +prefix+".png"});
+                    image: "/assets/uno_deck/c" +c+"_" +prefix+".png"});
                     }        
                 }
             }
@@ -48,6 +50,7 @@ export class UnoDeck {
                         colour: "Plus 4 Cards",
                     image: "/assets/uno_deck/c4_01.png"});
                     }
+        this.Shuffle();
 
         }
 
@@ -55,13 +58,25 @@ export class UnoDeck {
 
             for(let x = 0; x<times; x++) {
             for(let i in this.cards){
-                let swapNum = Math.floor(Math.random()*100);
+                let swapNum = Math.floor(Math.random()*1000);
+                swapNum = Math.ceil(swapNum/10);
                 let c:Card = this.cards[swapNum];
                 this.cards[swapNum] = this.cards[i];
-                this.cards[swapNum] = c;
+                this.cards[i] = c;
             }
             }
 
+        }
+
+        public Take(index: number):Card {
+            let card: Card = this.cards[index];
+            this.Remaining();
+            return card;
+        }
+
+        public Remaining():number {
+            UnoDeck.remainingCardsCount = UnoDeck.remainingCardsCount - 1;
+            return UnoDeck.remainingCardsCount;
         }
         
 
