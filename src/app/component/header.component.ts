@@ -51,9 +51,8 @@ export class HeaderComponent implements OnInit {
       let playerCards:Card[] = [];
       let nxtCard = 0;
       for(let num = 0; num<7; num++) {
-        nxtCard = i + num + nxtCard;
-        playerCards.push(this.deck.Take(nxtCard));
-        nxtCard = nxtCard + 6;      
+        nxtCard = i + (num * 7 );
+        playerCards.push(this.deck.Take(nxtCard));   
   }
       let playerNum:number = i+1;
       let player:Player = {name:"Player " + playerNum, cards:playerCards}
